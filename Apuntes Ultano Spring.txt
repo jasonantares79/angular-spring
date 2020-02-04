@@ -1,0 +1,130 @@
+juanonlab.com
+juanonlab.com/refmetapp/
+back en java
+front en Angular
+jenkins
+  - tareas no: pipelines
+  - maven
+
+
+spring boot
+
+  = Controller
+    simplemente recoge una llamada y llama a un service
+  = Service (DTO)
+      Lógica de negocio.
+      Llamadas al webservices, converters
+  = Converter
+    - Modificas los datos del DAO para obtener los datos formateados como los necesitas
+  = DAO
+    - manejas el objeto entidad.
+  = Spring Data
+    - Consulta a base de datos
+    - es la clase que hace insert, update... porque extiende de JPA repository
+  = DD.BB.
+  = clase de configuración, incialización
+
+= Notaciones
+@Autowired
+  private InMemoryRefranes inMemoryRefranes;
+    busca una clase cuyo método devuelva un objeto tipo InMemoryRefranes  y que sea el candidato óptimo.
+@Primary
+  identifica como método óptimo para generar el objeto devuelto en @Autowired
+@Bean
+  Guarda en memoria las propiedades y métodos.
+
+
+@Configuration
+  acciones iniciales al arrancar la aplicación
+  new Database =
+
+
+
+@SpringBootApplication
+  arranca la aplicación Spring
+  escanea todas clases del paquete en que se encuentra el main.
+@ComponentScan
+  Spring incluye estas clases en su @SpringBootApplication y las carga en memoria aunque no estén en el mismo paquete que el main.
+@ComponentScan(basePackages = "com.baeldung.componentscan.springapp")
+
+@JsonIgnoreProperties(ignoreUnknown = true)
+@Override
+  sobreescribe un método de la interfaz
+@Service
+  es un tipo de notación @Component
+@CrossOrigin
+  Evita un error del navegador cuando intentas acceder desde un dominio o subdominio diferente.
+@GetMapping("/refranes/mejor")
+  Es un endpoint, puede ser GET, POST, PUT...
+@GetMapping("/refranes/{numero}/{order}")
+public ResponseEntity<List<RefranDTO>> refranes(@PathVariable final Integer numero, @PathVariable final String order) {
+	       return new ResponseEntity<>(refranService.getRefranes(numero, order), HttpStatus.OK);
+     }
+
+@Query
+declaras en una interfaz una query y la utilizas con la función a continuación
+
+  @Query(value = "SELECT * FROM refranes ORDER BY RAND() LIMIT 1", nativeQuery = true)
+  Optional<Refran> findRandom();
+
+  Luego accedes a la función de la interfaz:
+  @Autowired
+	private IRefranDAO repository;
+  @Override
+	@Transactional(readOnly = true)
+	public Optional<Refran> getRandomRefran() {
+		return repository.findRandom();
+	}
+
+
+@Transactional(readOnly = true)
+@Qualifier("inMemory")
+@Qualifier("dataBase")
+@Entity
+@Table(name = "refranes")
+@Id
+@GeneratedValue(strategy = GenerationType.IDENTITY)
+@Column
+@ControllerAdvice
+@ExceptionHandler(DataBaseException.class)
+
+
+Optional
+
+
+List <miclase> = new ArrayList()
+final List<RefranDTO> listaRefranes = new ArrayList<>(); // ordenado de cero a ene
+
+String[] // esto no se usa
+
+¿qué significa <RefranDTO> en com.metricalab.refranes.controllers.Refranes?
+        @GetMapping("/refranes/aleatorio")
+        	public ResponseEntity<RefranDTO> refranRandom() {
+        		log.log(Level.INFO, "Llamada al endpoint /refranes/aleatorio");
+        		return new ResponseEntity<>(refranService.getRandomRefran(), HttpStatus.OK);
+        	}
+
+
+public interface GenericConverter<I, O> extends Function<I, O>
+
+public class RefranConverter implements GenericConverter<Refran, RefranDTO>
+
+Expresiones Lambda
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/****/
